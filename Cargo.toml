@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "2_HelloRust",
+    "3_クレートを使う"
+]
