@@ -5,4 +5,5 @@ members = [
     "3_クレートを使う",
     "5_print",
     "6_debug",
+    "7_display",
 ]
