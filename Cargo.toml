@@ -6,4 +6,5 @@ members = [
     "5_print",
     "6_debug",
     "7_display",
+    "8_guessing_game",
 ]
