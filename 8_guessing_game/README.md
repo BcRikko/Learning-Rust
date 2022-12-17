@@ -108,4 +108,35 @@ $ cargo doc --open
 ```
 
 - 依存クレートが提供するドキュメントをビルドして、ブラウザで表示してくれる
-- `クレートand`
+
+
+## 比較する
+
+```rs
+match guess.cmp(...) {
+  Ordering::Less => println!("Too small!"),  // ← アーム
+  Ordering::Greater => println!("Too big!"), // ← アーム
+  Ordering::Equal => println!("You win!"),   // ← アーム
+}
+```
+
+- String.cmp は `std::cmp::Ordering` という列挙子を返す
+- `Ordering`(列挙子)は `Less`, `Greater`, `Equal` を持っている
+- `match` はマッチされるパターンと、そのパターンにマッチしたときに実行されるコード（アーム）で構成される
+  
+
+## キャスト
+
+```rs
+// String
+let mut guess = String::new();
+...
+
+// u32 にキャスト
+let guess: u32 = guess.trim().parse().expect(...)
+```
+
+- 再代入のことを シャドーイング（Shadowing）と呼ぶ
+- `let val: TypeName = ...`で明示的に型を指定する
+- `.parse()`は失敗する可能性があるので`Result`型を返す
+- 失敗すると`'Please type a number!: ParseIntError { kind: InvalidDigit }'` のようなメッセージが表示されるプログラムが終了する
