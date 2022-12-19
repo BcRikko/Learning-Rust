@@ -7,4 +7,5 @@ members = [
     "6_debug",
     "7_display",
     "8_guessing_game",
+    "9_basic",
 ]
