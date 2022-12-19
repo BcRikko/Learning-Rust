@@ -39,6 +39,8 @@ io::stdin()
 - Result型は列挙型（enum） = Ok | Err
 - `match`と一緒に使われる
 
+### Result.expect
+
 ```rs
 io::stdin()
   .read_line(&mut guess) // io::Result
@@ -64,6 +66,22 @@ where
     }
 }
 ```
+
+### match Result
+
+- Result型を返すメソッドは、matchでエラーハンドリングができる
+- `match <Result> { Ok, Err }` の形式
+
+```rs
+let guess: u32 = match guess.trim().parse() {
+    Ok(num) => num,
+    Err(_) => {
+        println!("Please type a number!");
+        continue;
+    }
+};
+```
+
 
 ## クレート
 
