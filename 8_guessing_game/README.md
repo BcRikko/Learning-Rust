@@ -140,3 +140,13 @@ let guess: u32 = guess.trim().parse().expect(...)
 - `let val: TypeName = ...`で明示的に型を指定する
 - `.parse()`は失敗する可能性があるので`Result`型を返す
 - 失敗すると`'Please type a number!: ParseIntError { kind: InvalidDigit }'` のようなメッセージが表示されるプログラムが終了する
+
+
+## ループ（無限ループ）
+
+```rs
+loop {
+  ...
+  break; // 無限ループの終了
+}
+```
