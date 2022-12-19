@@ -27,3 +27,31 @@ const mut Y: u32 = 5;
 
 const MAX_POINTS: u32 = 100_00;
 ```
+
+## シャドーイング
+
+```rs
+let x = 5;
+// ブロックスコープ
+{
+  let x = x * 2;
+}
+```
+
+### `mut` とシャドーイングの違い
+
+- `mut`の場合は型が保持されるため、異なる型の値を代入できない
+- シャドーイングをすると、同じ変数名だけど異なる型を受け入れられる
+
+```rs
+// mut を使う場合
+let mut spaces = "    ";
+// mismatched types
+spaces = spaces.len();
+//       ^^^^^^^^^^^^ expected `&str`, found `usize`
+
+// シャドーイングの場合
+let spaces = "    ";
+let spaces = spaces.len();
+// OK
+```
