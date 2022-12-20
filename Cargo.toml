@@ -9,4 +9,5 @@ members = [
     "8_guessing_game",
     "9_basic",
     "10_functions",
+    "11_control_flow",
 ]
