@@ -10,4 +10,5 @@ members = [
     "9_basic",
     "10_functions",
     "11_control_flow",
+    "12_ownership",
 ]
