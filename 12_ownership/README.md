@@ -95,3 +95,65 @@ fn calculate_length(s: String) -> (String, usize) {
     (s, length)
 }
 ```
+
+
+## 参照と借用
+
+- String型を呼び出し元に返さないとムーブされてしまい参照できなくなる
+- `&xxx` とすることで ownership を渡す代わりにオブジェクトへの参照を渡す
+  - 参照外しは `*` を使う
+
+```rs
+fn main() {
+  let s = String::from("Hello");
+  // &s で参照を生成し渡す
+  let len = calculate_length(&s);
+  println!("{}, {}", s, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+  // s は参照で ownership は持っていないためスコープを外れても有効（dropされない）
+  s.len()
+
+  // s.push_str(", world");  // 変更はできない
+  // ^^ cannot borrow as mutable
+}
+```
+
+### 可変な参照
+
+```rs
+fn main() {
+  let mut s = String::from("hello");
+  change(&mut s)
+
+  println!("{}", s);
+  // > hello, world
+}
+
+fn change(s: &mut String) {
+  s.push_str(", world");
+}
+```
+
+### ダングリングポインタ
+
+- コンパイラが絶対ダングリング参照にならないように保証してくれる
+
+```rs
+fn main() {
+  let reference_to_nothing = dangle();
+}
+
+fn dangle() -> &String { // s がドロップされるのにその参照を返している
+  let s = String::from("hello");
+  &s
+} // s のスコープが抜けるのでドロップされる
+
+// Error: missing lifetime specifier
+
+fn no_dangle() -> String {
+  let s = String::from("hello");
+  s
+}
+```

@@ -55,6 +55,16 @@ fn main() {
     let (t2, len) = calculate_length(t1);
     // println!("t1: {}, t2: {}, len: {}", t1, t2, len);
     //                                     ^^ value borrowed here after move
+
+    let ref1 = String::from("Reference");
+    let len = calculate_length2(&ref1);
+    println!("ref1: {}, len: {}", ref1, len);
+
+    let mut mutRef = String::from("Hello");
+    change(&mut mutRef);
+    println!("mutRef: {}", mutRef);
+
+    // let reference_to_nothing = dangle();
 }
 
 
@@ -80,3 +90,17 @@ fn calculate_length(s: String) -> (String, usize) {
     let length = s.len();
     (s, length)
 }
+
+fn calculate_length2(s: &String) -> usize {
+    s.len()
+}
+
+fn change(s: &mut String) {
+    s.push_str(", world")
+}
+  
+// fn dangle() -> &String {
+//     //         ^ expected named lifetime parameter
+//     let s = String::from("hello");
+//     &s
+// }
