@@ -157,3 +157,49 @@ fn no_dangle() -> String {
   s
 }
 ```
+
+## スライス型
+
+
+```rs
+let s = String::from("hello world");
+let word = first_word(&s);
+// word と s は関連がある
+
+s.clear();
+// s をクリアすると word の意味がなくなるが、コンパイルエラーにならない
+```
+
+```rs
+let s = String::from("hello world");
+
+// 文字列スライス
+let hello = &s[0..5];
+let world = &s[6..11];
+
+//---
+let len = s.len();
+
+// 0〜2
+let slice = &s[0..2];
+let slice = &s[..2];
+
+// 3〜最後
+let slice = &s[3..len];
+let slice = &s[3..];
+
+// 0〜最後
+let slice = &s[0..len];
+let slice = &s[..];
+```
+
+- String: 文字列型
+- str: 文字列スライス型
+  - 文字列リテラル = スライス
+
+```rs
+// 文字列型（String）
+let s = String::from("...");
+
+// スライス型（&str）
+let s = "hello world";

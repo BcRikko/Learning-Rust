@@ -65,6 +65,17 @@ fn main() {
     println!("mutRef: {}", mutRef);
 
     // let reference_to_nothing = dangle();
+
+    let s = String::from("Hello world");
+    let word = first_word(&s);
+    println!("word: {}", word);
+    // s.clear(); // Error: mutable borrow ocurs here
+    println!("word: {}", word);
+    
+    let s = "Hello world";
+    let word = first_word(&s);
+    println!("word: {}", word);
+
 }
 
 
@@ -104,3 +115,16 @@ fn change(s: &mut String) {
 //     let s = String::from("hello");
 //     &s
 // }
+
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        // b' ' … バイトリテラル表記
+        if item == b' ' {
+            return &s[0..i]
+        }
+    }
+
+    &s[..]
+}
